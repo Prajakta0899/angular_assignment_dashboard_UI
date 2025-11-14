@@ -1,0 +1,42 @@
+<div class="sidebar" [ngClass]="{ collapsed: !isOpen }">
+  <!-- Logo Section -->
+  <div class="sidebar__header">
+    <div class="sidebar__logo">
+      <div class="logo-circle">
+        <span>L</span>
+      </div>
+      <span class="logo-text" *ngIf="isOpen">LogoIpsum</span>
+    </div>
+    <!-- Collapse/Expand circular toggle next to logo (matches screenshot) -->
+    <button class="sidebar__collapse-btn" (click)="toggleSidebar()" [attr.aria-label]="isOpen ? 'Collapse sidebar' : 'Expand sidebar'">
+      <i [class]="isOpen ? 'pi pi-chevron-left' : 'pi pi-chevron-right'"></i>
+    </button>
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav class="sidebar__nav">
+    <div class="nav-section">
+      <ul class="nav-list">
+        <li class="nav-item" *ngFor="let item of menuItems">
+          <a [href]="item.route" class="nav-link" [title]="item.label">
+            <i [class]="item.icon"></i>
+            <span class="nav-label" *ngIf="isOpen">{{ item.label }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Footer with User -->
+  <div class="sidebar__footer">
+    <div class="user-profile">
+      <div class="user-avatar">
+        <img src="https://via.placeholder.com/40" alt="User" />
+      </div>
+      <div class="user-info" *ngIf="isOpen">
+        <div class="user-name">Ismail bin Moil</div>
+        <div class="user-role">UI Designer</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="dashboard">
+  <div class="dashboard__inner">
+  <!-- Dashboard Header with Title and Search -->
+  <div class="dashboard__header">
+    <h1 class="dashboard__title">Dashboard</h1>
+    <div class="dashboard__search">
+      <i class="pi pi-search"></i>
+      <input type="text" placeholder="Search for anything...." />
+    </div>
+  </div>
+
+  <!-- Stats Cards Row -->
+  <div class="dashboard__section">
+    <div class="stats-grid">
+      <app-stats-card 
+        *ngFor="let stat of statCards"
+        [title]="stat.title"
+        [value]="stat.value"
+        [change]="stat.change"
+        [icon]="stat.icon"
+        [isPositive]="stat.isPositive">
+      </app-stats-card>
+    </div>
+  </div>
+
+  <!-- Filters Section -->
+  <div class="dashboard__section">
+    <app-filters (apply)="onFilterChange()"></app-filters>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="dashboard__section">
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-card__header">
+          <h3 class="chart-card__title">Analytics</h3>
+          <div class="chart-card__legend">
+            <span class="legend-item"><span class="legend-color" style="background:#7C3AED"></span>Income</span>
+            <span class="legend-item"><span class="legend-color" style="background:#F472B6"></span>Outcome</span>
+          </div>
+        </div>
+        <div class="chart-card__body">
+          <app-apex-chart type="bar"></app-apex-chart>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card__header">
+          <h3 class="chart-card__title">Revenue by Category</h3>
+        </div>
+        <div class="chart-card__body">
+          <app-apex-chart type="donut"></app-apex-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transaction Report -->
+  <div class="dashboard__section">
+    <div class="transaction-report">
+      <h3 class="transaction-report__title">Transaction Report</h3>
+      <div class="transaction-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th class="text-right">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transaction of transactionData" [ngClass]="{ 'income-row': transaction.type === 'income' }">
+              <td>{{ transaction.date }}</td>
+              <td>{{ transaction.description }}</td>
+              <td class="text-right" [ngClass]="{ 'text-success': transaction.type === 'income', 'text-danger': transaction.type === 'expense' }">
+                {{ transaction.amount }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

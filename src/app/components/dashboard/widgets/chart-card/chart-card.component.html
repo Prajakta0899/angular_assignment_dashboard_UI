@@ -1,0 +1,25 @@
+<div class="chart-card">
+  <div class="chart-card__header">
+    <h3 class="chart-card__title">{{ title }}</h3>
+    <div class="chart-card__legend" *ngIf="legend">
+      <span *ngFor="let item of legend" class="legend-item">
+        <span class="legend-color" [style.background-color]="item.color"></span>
+        {{ item.label }}
+      </span>
+    </div>
+  </div>
+  <div class="chart-card__body">
+    <div class="bar-chart" *ngIf="chartData">
+      <div class="chart-bars">
+        <div class="bar-item" *ngFor="let item of chartData">
+          <div class="bar-label">{{ item.label }}</div>
+          <div class="bar-container">
+            <div class="bar" [style.height.%]="item.value" [style.background-color]="item.color || '#7C3AED'">
+              <span class="bar-value">{{ item.value }}%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

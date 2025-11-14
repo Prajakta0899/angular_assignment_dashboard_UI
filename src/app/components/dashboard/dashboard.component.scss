@@ -1,0 +1,425 @@
+.dashboard {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 18px 16px 18px 0; /* reduced right spacing to avoid possible overflow */
+  padding: 20px 24px; /* small horizontal gutter so content breathes from sidebar */
+  min-height: calc(100vh - 36px);
+  background-color: var(--bg-white);
+  border-radius: 0 14px 14px 0; /* square left edge to sit flush with sidebar */
+  box-shadow: none;
+  transition: all 0.25s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  overflow: hidden; /* keep outer container fixed, allow inner scrolling */
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: var(--content-max-width);
+    width: 100%;
+    margin: 28px 0 20px 0; /* space after dashboard title/search */
+    padding: 0 24px; /* keep a small internal gutter for header content */
+  }
+
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0;
+    flex-shrink: 0;
+    font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    letter-spacing: -0.2px;
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px 14px;
+    gap: 10px;
+    width: auto;
+    max-width: 280px;
+
+    i {
+      color: var(--text-muted);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    input {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text-dark);
+      font-size: 13px;
+      width: 100%;
+      min-width: 200px;
+      height: 100%;
+
+      &::placeholder {
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+    }
+  }
+
+  &__section { 
+    margin-bottom: 36px; /* increased vertical spacing between sections */
+    animation: fadeIn 0.4s ease-out;
+    max-width: var(--content-max-width);
+    width: 100%;
+    margin: 0; /* align sections flush with the left edge */
+    padding: 0 24px; /* small internal gutter for content */
+  }
+}
+
+/* Scrollable inner content for the white dashboard card */
+.dashboard__inner {
+  overflow-y: auto;
+  overflow-x: hidden; /* prevent horizontal scroll inside */
+  padding-right: 12px; /* room for scrollbar */
+  max-height: calc(100vh - 120px);
+}
+
+/* custom small scrollbar inside the dashboard card */
+.dashboard__inner::-webkit-scrollbar {
+  width: 10px;
+}
+
+.dashboard__inner::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dashboard__inner::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(124,58,237,0.18), rgba(124,58,237,0.28));
+  border-radius: 8px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px; /* space after stats row */
+}
+
+.filters {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  gap: 24px; /* slightly larger and equal gap between filter controls */
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 28px; /* extra spacing below filters for breathing room */
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 0; /* distribute available space equally between filter controls */
+  min-width: 140px;
+
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0;
+  }
+
+  p-calendar,
+  p-dropdown {
+    width: 100%;
+  }
+}
+
+.btn-search {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(.2,.9,.2,1);
+  height: 40px;
+  min-width: 100px;
+
+  &:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.18);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 360px);
+  gap: 28px; /* slightly larger gap between chart areas */
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 28px; /* space after charts */
+  margin-top: 18px; /* space before apex chart */
+}
+
+.transaction-report {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  animation: scaleUp 0.4s ease-out forwards;
+
+  &__title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0 0 20px 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+.transaction-table {
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      background-color: var(--bg-light);
+
+      th {
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        border-bottom: 2px solid var(--border-color);
+      }
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.2s ease-in-out;
+
+      &:hover {
+        background-color: var(--bg-light);
+      }
+
+      &.income-row {
+        background-color: rgba(16, 185, 129, 0.02);
+
+        &:hover {
+          background-color: rgba(16, 185, 129, 0.05);
+        }
+      }
+
+      td {
+        padding: 12px 16px;
+        font-size: 13px;
+        color: var(--text-dark);
+      }
+    }
+  }
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-success {
+  color: #10b981 !important;
+  font-weight: 600;
+}
+
+.text-danger {
+  color: #ef4444 !important;
+  font-weight: 600;
+}
+
+// Responsive
+@media (max-width: 1200px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 16px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .filters {
+    flex-direction: column;
+    gap: 12px;
+
+    .filter-group {
+      min-width: unset;
+      width: 100%;
+    }
+
+    .btn-search {
+      width: 100%;
+    }
+  }
+
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .transaction-report {
+    padding: 16px;
+
+    &__title {
+      font-size: 14px;
+    }
+  }
+
+  .transaction-table table {
+    font-size: 12px;
+
+    th, td {
+      padding: 10px 12px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard {
+    padding: 12px;
+  }
+
+  .stats-grid {
+    gap: 12px;
+  }
+
+  .filters {
+    padding: 16px 12px;
+  }
+
+  .transaction-table {
+    font-size: 11px;
+
+    table th, table td {
+      padding: 8px;
+    }
+  }
+}
+
+/* Reuse chart-card styles globally so dashboard markup can use .chart-card */
+.chart-card {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease-in-out;
+  animation: scaleUp 0.4s ease-out forwards;
+  overflow: hidden; /* ensure inner charts don't overflow horizontally */
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(124, 58, 237, 0.18);
+    border-color: var(--primary-color);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  &__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0;
+  }
+
+  &__body {
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  background-color: var(--chart-primary);
+}
+
+/* Small stat card style to match image */
+.stat-card {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 18px 16px;
+  transition: all 0.28s ease;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(124, 58, 237, 0.06);
+  }
+}
+
+/* ApexCharts overrides (best-effort selectors) */
+.apexcharts-series .apexcharts-bar,
+.apexcharts-bar-area .apexcharts-series .apexcharts-bar {
+  fill: var(--chart-primary) !important;
+}
+
+.apexcharts-legend .apexcharts-marker,
+.apexcharts-legend .apexcharts-marker svg {
+  fill: var(--chart-primary) !important;
+  stroke: var(--chart-primary) !important;
+}
+

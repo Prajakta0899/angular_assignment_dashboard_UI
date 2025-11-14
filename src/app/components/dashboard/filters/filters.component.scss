@@ -1,0 +1,257 @@
+.filters {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+
+.filters-labels {
+  display: none;
+}
+
+.filters-inputs {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.filter-input {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+
+  &:nth-child(1) {
+    width: 160px;
+
+    &::before {
+      content: 'From:';
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+  }
+
+  &:nth-child(2) {
+    width: 160px;
+
+    &::before {
+      content: 'To:';
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+  }
+
+  &:nth-child(3) {
+    width: 210px;
+
+    &::before {
+      content: 'Select Category:';
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+  }
+
+  &:nth-child(4) {
+    width: 200px;
+
+    &::before {
+      content: 'Select Service:';
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+  }
+
+  ::ng-deep .p-calendar {
+    width: 100%;
+    height: 36px;
+
+    .p-calendar-w-btn {
+      width: 100%;
+      height: 36px;
+      display: flex;
+      align-items: stretch;
+      position: relative;
+    }
+
+    .p-inputtext {
+      width: 100% !important;
+      padding: 8px 40px 8px 10px !important;
+      font-size: 12px !important;
+      height: 36px !important;
+      border-radius: 6px !important;
+      border: 1px solid var(--border-color) !important;
+      line-height: 20px !important;
+      box-sizing: border-box !important;
+      color: var(--text-dark) !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .p-calendar-button {
+      position: absolute !important;
+      right: 0 !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      width: 36px !important;
+      height: 36px !important;
+      padding: 0 !important;
+      border-radius: 0 6px 6px 0 !important;
+      border: none !important;
+      background-color: transparent !important; /* remove solid background from button */
+      color: var(--text-muted) !important;
+      flex-shrink: 0;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+    }
+
+    /* Decorative colored pill inside the date area (placed before the calendar button)
+       This simulates adding the accent background to the date span while keeping the
+       actual calendar button background transparent. */
+    .p-calendar-w-btn::after {
+      content: '';
+      position: absolute;
+      right: 36px; /* sits just left of the button */
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--primary-color);
+      opacity: 0.12;
+      pointer-events: none;
+    }
+  }
+
+  ::ng-deep .p-dropdown {
+    width: 100%;
+    height: 36px;
+
+    .p-dropdown-trigger {
+      width: 36px !important;
+      padding: 0 !important;
+      height: 36px !important;
+      line-height: 36px !important;
+    }
+
+    .p-dropdown-label {
+      padding: 8px 10px !important;
+      font-size: 12px !important;
+      height: 36px !important;
+      line-height: 20px !important;
+      color: #9ca3af !important;
+    }
+
+    .p-dropdown {
+      border: 1px solid var(--border-color) !important;
+      border-radius: 6px !important;
+      height: 36px !important;
+    }
+  }
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 0 1 auto;
+
+  label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0;
+  }
+}
+
+.filter-actions {
+  display: flex;
+  align-items: center;
+}
+
+.btn-search {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border: none !important;
+  padding: 0 32px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  height: 36px;
+  width: auto;
+  min-width: 100px;
+  flex: 0 0 auto;
+  transition: all 0.3s ease-in-out;
+  border-radius: 20px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+
+  &:hover {
+    background-color: var(--primary-light) !important;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3) !important;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1200px) {
+  .filters {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .filters-inputs {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+
+    .filter-input {
+      width: 100%;
+    }
+
+    .btn-search {
+      width: 100%;
+      margin-top: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .filters-inputs {
+    flex-direction: column;
+    gap: 12px;
+
+    .filter-input {
+      width: 100%;
+    }
+
+    .btn-search {
+      width: 100%;
+      margin-top: 0;
+    }
+  }
+}

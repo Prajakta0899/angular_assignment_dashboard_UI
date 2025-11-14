@@ -1,0 +1,370 @@
+.sidebar {
+  position: relative;
+  left: 0;
+  top: 0;
+  height: auto;
+  min-height: calc(100vh - 36px);
+  margin: 18px 0; /* keep same vertical spacing as dashboard */
+  /* animate width/padding so collapse feels smooth */
+  transition: width 0.32s cubic-bezier(.2,.9,.2,1), padding 0.32s cubic-bezier(.2,.9,.2,1), margin 0.32s;
+  width: 260px;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: none;
+  z-index: 10;
+  overflow: hidden;
+
+  &.collapsed {
+    width: 80px;
+
+    .sidebar__header {
+      padding-left: 0;
+      padding-right: 0;
+      border-bottom: 1px solid rgba(124, 58, 237, 0.1);
+    }
+
+    .sidebar__logo {
+      justify-content: center;
+      padding: 0;
+    }
+
+    .logo-text {
+      display: none;
+    }
+
+    .nav-label {
+      display: none;
+    }
+
+    .nav-link {
+      justify-content: center;
+      padding: 12px;
+    }
+
+    .user-info {
+      display: none;
+    }
+
+    .nav-section__title {
+      display: none;
+    }
+
+    .sidebar__nav {
+      padding: 12px 0;
+    }
+  }
+
+  // Header/Logo Section
+  &__header {
+    padding: 0 20px 30px;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.12);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+    .logo-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 20px;
+      flex-shrink: 0;
+      color: white;
+      box-shadow: 0 8px 20px rgba(124, 58, 237, 0.18);
+    }
+
+    .logo-text {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--sidebar-text);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      letter-spacing: -0.3px;
+    }
+  }
+
+  /* Circular collapse/expand button placed near the logo (matches screenshot) */
+  .sidebar__collapse-btn {
+    position: absolute;
+    top: 14px;
+    right: -12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFFFFF 0%, #F7F5FD 100%);
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(11, 9, 23, 0.12);
+    cursor: pointer;
+    z-index: 1100;
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), right 0.25s ease-in-out, background 0.2s ease;
+  }
+
+  .sidebar__collapse-btn i {
+    color: #111827;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  /* When sidebar is collapsed, keep the button aligned to the smaller width */
+  &.collapsed {
+    .sidebar__collapse-btn {
+      right: -12px;
+    }
+  }
+
+  // Navigation
+  &__nav {
+    flex: 1;
+    padding: 20px 0;
+    overflow-y: auto;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-section {
+    padding: 0 12px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &__title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: var(--sidebar-text-light);
+      padding: 12px 16px;
+      text-transform: uppercase;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 8px;
+      padding-right: 12px;
+    }
+  }
+
+  .nav-chevron {
+    font-size: 12px;
+    color: var(--sidebar-text-light);
+    transition: transform 0.25s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pi-chevron-down.nav-chevron {
+    transform: rotate(0deg);
+  }
+
+  .pi-chevron-right.nav-chevron {
+    transform: rotate(0deg);
+  }
+
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    margin: 4px 0;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    margin: 2px 0;
+    font-size: 14px;
+    font-weight: 500;
+
+    i {
+      font-size: 18px;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &:hover {
+      background-color: rgba(124, 58, 237, 0.06);
+      color: var(--primary-color);
+      transform: translateX(4px); /* reduced to avoid small horizontal overflow */
+
+      i {
+        transform: scale(1.05);
+        color: var(--primary-color);
+      }
+    }
+
+    &.active {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(167, 139, 250, 0.1));
+      color: var(--primary-color);
+      font-weight: 600;
+      border-left: 3px solid var(--primary-color);
+      padding-left: 13px;
+    }
+  }
+
+  .nav-label {
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    color: var(--sidebar-text);
+  }
+
+  // Footer
+  &__footer {
+    padding: 20px;
+    border-top: 1px solid rgba(124, 58, 237, 0.08);
+    margin-top: auto;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .user-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(124, 58, 237, 0.12);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  .user-info {
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 0;
+  }
+
+  .user-name {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--sidebar-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .user-role {
+    font-size: 12px;
+    color: var(--sidebar-text-light);
+    line-height: 1.2;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// Scrollbar for sidebar
+
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.15);
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: rgba(124, 58, 237, 0.25);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .sidebar {
+    width: 80px;
+    padding-top: 16px;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.collapsed {
+      width: 80px;
+    }
+
+    .sidebar__header {
+      padding: 0 12px 20px;
+      text-align: center;
+    }
+
+    .sidebar__logo {
+      justify-content: center;
+      gap: 0;
+    }
+
+    .logo-text,
+    .nav-label,
+    .user-info,
+    .nav-section__title {
+      display: none;
+    }
+
+    .nav-link {
+      justify-content: center;
+      padding: 12px;
+    }
+
+    .nav-section {
+      padding: 0 8px;
+    }
+  }
+}
+
+/* Additional responsive breakpoints for sidebar */
+@media (max-width: 1200px) {
+  .sidebar { width: 220px; }
+}
+
+@media (max-width: 900px) {
+  .sidebar { width: 100%; min-height: auto; position: relative; }
+  .sidebar__collapse-btn { display: none; }
+  .nav-label { display: inline-block; }
+}
+
+/* On narrow screens, avoid shifting items horizontally which can create overflow */
+@media (max-width: 900px) {
+  .sidebar {
+    .nav-link:hover {
+      transform: none !important;
+    }
+  }
+}

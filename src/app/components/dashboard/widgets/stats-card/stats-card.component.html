@@ -1,0 +1,21 @@
+<div class="stats-container">
+<div class="stats-card">
+  <div class="stats-card__top">
+    <div class="stats-card__icon" [ngClass]="{ 'positive': isPositive, 'negative': !isPositive }">
+      <i [class]="icon"></i>
+    </div>
+    <button class="stats-card__menu">
+      <i class="pi pi-ellipsis-v"></i>
+    </button>
+  </div>
+  
+  <div class="stats-card__title">{{ title }}</div>
+  
+  <div class="stats-card__content">
+    <div class="stats-card__value">{{ value }}</div>
+    <div class="stats-card__footer" [ngClass]="{ 'positive': isPositive, 'negative': !isPositive }">
+      <span class="stats-card__change">{{ change }}</span>
+    </div>
+  </div>
+</div>
+</div>

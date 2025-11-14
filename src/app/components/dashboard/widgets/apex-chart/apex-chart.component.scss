@@ -1,0 +1,14 @@
+.apex-chart-card {
+  background: transparent;
+  width: 100%;
+}
+
+.apex-chart__container {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .apex-chart__container {
+    height: 260px;
+  }
+}
